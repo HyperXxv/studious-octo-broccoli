@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaharri X Hri Hri 2025 Revenge Tour</title>
+  <link href="https://fonts.googleapis.com/css2?family=Edwardian+Script+ITC&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: 'Edwardian Script ITC', cursive;
+      text-align: center;
+      padding-top: 15vh;
+    }
+    h1 {
+      font-size: 3.5em;
+      margin-bottom: 40px;
+      color: darkred;
+      text-shadow: 0 0 10px #ff004c, 0 0 20px #ff004c, 0 0 30px #ff004c;
+      letter-spacing: 3px;
+      transform: rotate(-1deg);
+    }
+    #timer {
+      font-size: 2em;
+      font-family: monospace;
+    }
+    audio {
+      display: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      background: #ff004c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ff004c;
+    }
+    button:hover {
+      background: #e60042;
+    }
+    #punch-animation {
+      display: none;
+      margin-top: 40px;
+      animation: punch 0.6s ease-in-out;
+    }
+    @keyframes punch {
+      0% { transform: scale(1) translateX(0); }
+      30% { transform: scale(1.1) translateX(-10px); }
+      50% { transform: scale(1.3) translateX(10px); }
+      70% { transform: scale(0.9) translateX(-5px); }
+      100% { transform: scale(1) translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Shaharri X Hri Hri 2025 Revenge Tour</h1>
+  <div id="timer">Loading...</div>
+
+  <button onclick="document.getElementById('bg-music').play()">
+    Play Music
+  </button>
+
+  <audio id="bg-music" loop playsinline>
+    <source src="bg-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="punch-animation">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExODNkNnQ3ZXd3Z3NsNm9hZXR0azVxeWo4ZXhmbGhwbTFiZWV3ZzR5aiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3ohc1h1hm4YvE5giYo/giphy.gif" alt="Punch Animation" width="300">
+  </div>
+
+  <script>
+    const targetDate = new Date("June 30, 2025 00:00:00").getTime();
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("timer").innerHTML = "It's Tour Time!";
+        const punch = document.getElementById("punch-animation");
+        punch.style.display = "block";
+        punch.style.animation = 'none';
+        punch.offsetHeight; // trigger reflow
+        punch.style.animation = null;
+
+        document.getElementById('bg-music').play().catch(e => {
+          console.log("Audio play prevented, user interaction required.");
+        });
+
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
